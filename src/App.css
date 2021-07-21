@@ -84,4 +84,28 @@
   background-color: rgb(167, 163, 163);
   border-radius: 6px ;
   box-shadow: 6px 6px 2px 1px rgba(65, 65, 95, 0.2);
+  padding: 10px;
+}
+
+
+/* styling for cards */
+.trade-listings-container{
+  height: 100%;
+  width: 100%;
+  display:flex;
+  padding: 10px;
+  background-color: red;
+}
+
+.listing-card{
+  height: 250px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  border: solid gray;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 10px;
 }
