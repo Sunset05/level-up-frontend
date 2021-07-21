@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
     return (
@@ -8,9 +9,19 @@ export default function Header() {
                 <h1>MY<span>Site</span></h1>
             </div>
             <ul className='navigation'>
-                <a><li>Home</li></a>
-                <a><li>Tech-Trading</li></a>
-                <a><li>Contact</li></a>
+        
+                <Link to="/">
+                <li>Home</li>
+                </Link>
+
+                <Link to="/trade/">
+                <li>Trade</li>
+                </Link>
+
+                <Link to="/contact/">
+                <li>Contact</li>
+                </Link>
+
             </ul>
             </div>
         </div>
