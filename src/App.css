@@ -6,6 +6,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body{
+  background-color: gray;
+}
+
 /* styling for header component */
 .header{
   width: 100%;
@@ -108,4 +112,32 @@
   border-radius: 6px;
   padding: 10px;
   margin: 10px;
+}
+
+input[type="submit"]{
+  padding: 5px;
+  box-shadow: 0 20px 20px -10px rgb(199, 199, 199);
+  transition: .2s linear;
+}
+input[type="submit"]:hover{
+  color: white;
+  background-color: rgb(35, 205, 26);
+  border: none;
+  font-weight: bold;
+}
+
+/* signup page styling */
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  /* center to the parent */
+  height: 300px;
+  margin: auto;
+  justify-content: space-evenly;
+  background-color: white;
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 20px;
 }
