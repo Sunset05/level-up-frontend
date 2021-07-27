@@ -5,6 +5,7 @@ export default class Form extends Component {
         item: "",
         price: "",
         description: "",
+        image_url: ""
     }
 
     handleSubmit = (event) => {
@@ -29,6 +30,10 @@ export default class Form extends Component {
                     Item:
                     <input type="text" name="item" value={item} onChange={this.handleChange} />
                 </label>
+                {/* <label>
+                    Image:
+                    <input type="text" name="image" value={image} onChange={this.handleChange} />
+                </label> */}
                 <label>
                     Price:
                     <input type="text" name="price" value={price} onChange={this.handleChange} />

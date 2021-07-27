@@ -19,9 +19,41 @@ const initialState = {
   alerts: [],
 }
 
-class App extends Component{
+const listingsUrl = "http://localhost:9000/listings"
+const loginUrl = "http://localhost:9000/login"
+const usersUrl = "http://localhost:9000/users"
+const profileUrl = "http://localhost:9000/profile"
 
+class App extends Component{
+  
   state = initialState
+  
+  componentDidMount(){
+    this.authorizeUser()
+    fetch(listingsUrl, {
+      method: 'GET',
+      headers:{
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+    .then(response => response.json())
+    .then(listings => this.setState({listings: listings}))
+  }
+
+  authorizeUser = () => {
+    fetch(profileUrl, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+    .then(response => response.json())
+    .then(loggedInUser => {
+      const { user } = loggedInUser
+      this.setState({user})
+    })
+  }
+
 
   createListing = (newListing) => {
     this.setState({
@@ -29,8 +61,31 @@ class App extends Component{
     })
   }
 
+  loginUser = (user) => {
+    return fetch(loginUrl, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({user})
+    })
+    .then(response => response.json())
+    .then(response => {
+      if(response.error){
+        this.setState({alerts: [response.error]})
+      } else {
+        localStorage.setItem('token', response.token)
+          this.setState({
+            user: response.user,
+            alerts: ["Successful Login!"],
+            listings: response.user.listings
+          })
+      }
+    })
+  }
+
   signUp = (user) => {
-    return fetch("http://localhost:9000/users", {
+    return fetch(usersUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -40,17 +95,14 @@ class App extends Component{
     .then(response => response.json())
     .then(response => {
       if(response.errors){
-        this.setState({alerts: response.errors})
+        this.setState({alerts: [response.errors]})
       }
       else{
-        localStorage.setItem('token', response.token)
         this.setState({
-          user: response.user,
-          alerts: ["User successsfully created!"]
+          alerts: ["User successsfully created! Please Log in"]
         })
       }
     })
-
   }
   
   render() {
@@ -64,7 +116,7 @@ class App extends Component{
             exact 
             path="/"
             component={Home}
-            submitAction={this.submitAction}
+            submitAction={this.createListing}
             listings={this.state.listings}
             />
             {/* <Form submitAction={this.createListing}/>
@@ -73,7 +125,11 @@ class App extends Component{
             exact 
             path='/signup'
             render={(routerProps) => {
-              return <SignUpForm {...routerProps} signUp={this.signUp} alerts={this.state.alerts}/>
+              return <SignUpForm {...routerProps} 
+                        signUp={this.signUp}
+                        loginUser={this.loginUser}
+                        alerts={this.state.alerts}
+                      />
             }}
           />
           <Redirect to='/' />
