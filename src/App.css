@@ -1,3 +1,10 @@
+:root{
+  --black: --black;
+  --gray1: rgb(65, 65, 65);
+  --font-white: white;
+  --gray2: gray;
+}
+
 *{
   margin: 0;
   padding: 0;
@@ -7,7 +14,7 @@
 }
 
 body{
-  background-color: gray;
+  background-color: var(--gray1);
 }
 
 /* styling for header component */
