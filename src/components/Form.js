@@ -66,7 +66,7 @@ export default function Form(props) {
 
 
     return( 
-
+        <div>
             <form className="item-form" onSubmit={handleFireBaseUpload}>
                 <h2>Post an Item</h2>
                 <label>
@@ -91,6 +91,6 @@ export default function Form(props) {
                 <button type="submit">Submit</button>
                 {/* <input type="submit"/> */}
             </form>
-        
+        </div>
     )
 }

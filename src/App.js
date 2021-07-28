@@ -10,8 +10,11 @@ import {
 import { Component } from 'react';
 // import TradeListings from './pages/TradeListings'
 import SignUpForm from './components/SignUpForm';
-import Home from './pages/Home'
+import Profile from './pages/Profile'
 import PrivateRoute from './components/PrivateRoute';
+import Footer from './components/Footer';
+import Form from './components/Form';
+import Messages from './components/Messages';
 
 const initialState = {
   listings: [],
@@ -118,14 +121,13 @@ class App extends Component{
   render() {
     return (
       <Router>
-        <Header user={this.state.user}/>
-        <h1>Welcome to my site</h1>
+        <Header user={this.state.user}/> 
 
         <Switch>
           <PrivateRoute 
             exact 
-            path="/"
-            component={Home}
+            path="/profile"
+            component={Profile}
             submitAction={this.createListing}
             listings={this.state.listings}
             />
@@ -144,9 +146,15 @@ class App extends Component{
                       />
             }}
           />
-          <Redirect to='/' />
+          <Route path='/profile/new'>
+              <Form />
+          </Route>
+          <Route path='/profile/messages'>
+              <Messages />
+          </Route>
+          <Redirect to='/profile' />
         </Switch>
-  
+        <Footer />
       </Router>
     );
   }
