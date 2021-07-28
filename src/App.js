@@ -30,14 +30,18 @@ class App extends Component{
   
   componentDidMount(){
     this.authorizeUser()
-    fetch(listingsUrl, {
-      method: 'GET',
-      headers:{
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response => response.json())
-    .then(listings => this.setState({listings: listings}))
+    // fetch(listingsUrl, {
+    //   method: 'GET',
+    //   headers:{
+    //     'Authorization': `Bearer ${localStorage.token}`
+    //   }
+    // })
+    // .then(response => response.json())
+    // .then(result => result.error 
+      //  this.setState({alerts: [...this.state.alerts, result.error ]}) 
+    //   : this.setState({listings: result.listings})
+    // )
+    // .then(listings => this.setState({listings: listings}))
   }
 
   authorizeUser = () => {
@@ -50,7 +54,7 @@ class App extends Component{
     .then(response => response.json())
     .then(loggedInUser => {
       const { user } = loggedInUser
-      this.setState({user})
+      return user ? this.setState({user}) : null
     })
   }
 
@@ -104,11 +108,17 @@ class App extends Component{
       }
     })
   }
+
+  removeUserFromState = user => {
+    this.setState({
+      user: {}
+    })
+  }
   
   render() {
     return (
       <Router>
-        <Header />
+        <Header user={this.state.user}/>
         <h1>Welcome to my site</h1>
 
         <Switch>
@@ -129,6 +139,8 @@ class App extends Component{
                         signUp={this.signUp}
                         loginUser={this.loginUser}
                         alerts={this.state.alerts}
+                        user={this.state.user}
+                        removeUserFromState={this.removeUserFromState}
                       />
             }}
           />
