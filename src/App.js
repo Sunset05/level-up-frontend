@@ -122,8 +122,8 @@ class App extends Component{
     return (
       <div className="app-container">
         <Router>
-          <Header user={this.state.user}/> 
-
+        <Header user={this.state.user}/> 
+        <div className="main-page-display">
           <Switch>
             <PrivateRoute 
               exact 
@@ -156,6 +156,7 @@ class App extends Component{
             <Redirect to='/profile' />
           </Switch>
           <Footer />
+        </div>
         </Router>
       </div>
     );
