@@ -10,7 +10,7 @@ export default function Profile({user}) {
                 <div className='listing-card'>
                     <h3>{listing.item}</h3>
                     <img src={listing.image_url} alt={`${listing.item} `}/>
-                    <p>{listing.price}</p>
+                    <p>Asking-Price:  ${listing.price}</p>
                     <p>{listing.description}</p>
                 </div>
             )
@@ -20,9 +20,9 @@ export default function Profile({user}) {
     return (
         <div className='profile-page-container'>
             <div className='profile-info-container'>
-                <h1>Username</h1>
-                <Link to='profile/new'>new listing</Link>
-                <Link to='profile/messages'>messages</Link>
+                <h1>{user.username}</h1>
+                <Link to='profile/new' className="profile-selection-Link">new listing</Link>
+                <Link to='profile/messages' className="profile-selection-Link">messages</Link>
             </div>
 
             <div className='user-listings-container'>
