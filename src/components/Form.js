@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { storage } from '../firebase/firebase'
-
+import { useHistory } from 'react-router-dom'
 
 export default function Form(props) {
     const [item, setItem] = useState("")
@@ -8,8 +8,9 @@ export default function Form(props) {
     const [description, setDescription] = useState("")
     const [imageAsFile, setImageAsFile] = useState('')
     const [imageUrl, setImageUrl] = useState("")
+    const [alert, setAlert] = useState("")
+    const history = useHistory()
 
-    console.log('image as file', imageAsFile);
     const handleImageAsFile = (event) => {
         const image = event.target.files[0]
         setImageAsFile(image)
@@ -35,8 +36,28 @@ export default function Form(props) {
                     //get the download url then sets the image from friebase as the value
                     storage.ref('images').child(imageAsFile.name).getDownloadURL()
                         .then(fireBaseUrl => {setImageUrl(fireBaseUrl)})
+                        .then(fetch("http://localhost:9000/listings", {
+                            method: "POST",
+                            headers: {
+                                'Authorization': `Bearer ${localStorage.token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                listing:{
+                                    item,
+                                    price,
+                                    description,
+                                    image_url: imageUrl
+                                }
+                            })
+                        }))
+                        .then(() => {
+
+                            setAlert("post uploaded! Submit another?")
+                        })
                 }
             )
+
         }
     }
     // const handleSubmit = (event) => {
@@ -64,9 +85,12 @@ export default function Form(props) {
     }
     
 
+    const renderAlertMessage = () => {
+       return <p>{alert}</p>
+    }
 
     return( 
-        <div>
+
             <form className="item-form" onSubmit={handleFireBaseUpload}>
                 <h2>Post an Item</h2>
                 <label>
@@ -89,8 +113,16 @@ export default function Form(props) {
                     <input type="text" name="description" value={description} onChange={handleChange} />
                 </label>
                 <button type="submit">Submit</button>
-                {/* <input type="submit"/> */}
+                {alert === ""
+                    ? null
+                    : renderAlertMessage()
+                }
+                {
+                    alert === ""
+                    ? null
+                    :  <button onClick={()=>history.go(0)}>Submit Another Listing</button>
+                }
             </form>
-        </div>
+        
     )
 }

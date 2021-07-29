@@ -6,9 +6,10 @@ export default function SignUpForm(props) {
     const [login, setLogin] = useState(false)
 
     useEffect(() => {
+        const {removeUserFromState} = props
         localStorage.removeItem('token')
-        props.removeUserFromState()
-    }, [])
+        removeUserFromState()
+    },[])
 
     const handleSubmit = (event) => {
         event.preventDefault()

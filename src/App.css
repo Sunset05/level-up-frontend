@@ -119,16 +119,20 @@ body{
 }
 
 .listing-card{
-  height: 250px;
-  width: 250px;
+  height: 200px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
   border: solid gray;
   border-radius: 6px;
+  box-shadow: 3px 3px 3px rgb(247, 117, 31);
   padding: 10px;
   margin: 10px;
+}
+.listing-card h3{
+  position: relative;
 }
 
 input[type="submit"]{
@@ -174,6 +178,10 @@ input[type="submit"]:hover{
 /* styling for profile page */
 .profile-page-container{
   display: flex;
+  padding-left: 20px;
+  position: relative;
+  height: 100%;
+  width: 70%;
 }
 
 .profile-info-container{

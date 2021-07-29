@@ -22,7 +22,7 @@ const initialState = {
   alerts: [],
 }
 
-const listingsUrl = "http://localhost:9000/listings"
+// const listingsUrl = "http://localhost:9000/listings"
 const loginUrl = "http://localhost:9000/login"
 const usersUrl = "http://localhost:9000/users"
 const profileUrl = "http://localhost:9000/profile"
@@ -62,11 +62,11 @@ class App extends Component{
   }
 
 
-  createListing = (newListing) => {
-    this.setState({
-      listings: [...this.state.listings, newListing]
-    })
-  }
+  // createListing = (newListing) => {
+  //   this.setState({
+  //     listings: [...this.state.listings, newListing]
+  //   })
+  // }
 
   loginUser = (user) => {
     return fetch(loginUrl, {
@@ -112,7 +112,7 @@ class App extends Component{
     })
   }
 
-  removeUserFromState = user => {
+  removeUserFromState = () => {
     this.setState({
       user: {}
     })
@@ -120,42 +120,44 @@ class App extends Component{
   
   render() {
     return (
-      <Router>
-        <Header user={this.state.user}/> 
+      <div className="app-container">
+        <Router>
+          <Header user={this.state.user}/> 
 
-        <Switch>
-          <PrivateRoute 
-            exact 
-            path="/profile"
-            component={Profile}
-            submitAction={this.createListing}
-            listings={this.state.listings}
+          <Switch>
+            <PrivateRoute 
+              exact 
+              path="/profile"
+              component={Profile}
+              submitAction={this.createListing}
+              user={this.state.user}
+              />
+              {/* <Form submitAction={this.createListing}/>
+              <TradeListings listings={this.state.listings}/> */}
+            <Route 
+              exact 
+              path='/signup'
+              render={(routerProps) => {
+                return <SignUpForm {...routerProps} 
+                          signUp={this.signUp}
+                          loginUser={this.loginUser}
+                          alerts={this.state.alerts}
+                          user={this.state.user}
+                          removeUserFromState={this.removeUserFromState}
+                        />
+              }}
             />
-            {/* <Form submitAction={this.createListing}/>
-            <TradeListings listings={this.state.listings}/> */}
-          <Route 
-            exact 
-            path='/signup'
-            render={(routerProps) => {
-              return <SignUpForm {...routerProps} 
-                        signUp={this.signUp}
-                        loginUser={this.loginUser}
-                        alerts={this.state.alerts}
-                        user={this.state.user}
-                        removeUserFromState={this.removeUserFromState}
-                      />
-            }}
-          />
-          <Route path='/profile/new'>
-              <Form />
-          </Route>
-          <Route path='/profile/messages'>
-              <Messages />
-          </Route>
-          <Redirect to='/profile' />
-        </Switch>
-        <Footer />
-      </Router>
+            <Route path='/profile/new'>
+                <Form />
+            </Route>
+            <Route path='/profile/messages'>
+                <Messages />
+            </Route>
+            <Redirect to='/profile' />
+          </Switch>
+          <Footer />
+        </Router>
+      </div>
     );
   }
 }
