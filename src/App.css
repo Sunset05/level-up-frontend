@@ -147,23 +147,67 @@ body{
 .listing-card{
   color: var(--font-white);
   height: 250px;
-  width: 150px;
+  width: 400px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-content: center;
-  justify-content: center;
+  /* justify-content: center; */
   border: solid gray;
   border-radius: 6px;
   box-shadow: 3px 3px 3px rgb(247, 117, 31);
   padding: 10px;
   margin: 10px;
 }
+
+.listing-content-left{
+  /* color: var(--font-white); */
+  font-size: 0.875rem;
+  height: 250px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  /* align-content: center;
+  justify-content: center; */
+  /* border: solid gray; */
+  justify-content: space-evenly;
+  margin-right: 1em;
+  /* border-radius: 6px; */
+  /* box-shadow: 3px 3px 3px rgb(247, 117, 31); */
+  /* padding: 10px;
+  margin: 10px; */
+}
+
+.listing-content-right{
+  padding: 3px;
+  border: solid gray;
+  display: block;
+  margin: 0.7em auto 0.7em;
+}
+
 .listing-card h3{
   background-color: black;
   border-radius: 10px;
   padding: 3px;
 }
 
+.asking-price{
+  padding: 5px;
+}
+
+.asking-price span{
+  font-weight: 800;
+  
+}
+
+.asking-price::after{
+  content: "";
+  display: block;
+  height: 1px;
+  width: 2em;
+  background-color: var(--gray2);
+  margin: 0.5 auto 0.5em;
+}
+/* styling for buttons */
 input[type="submit"]{
   padding: 5px;
   box-shadow: 0 20px 20px -10px rgb(199, 199, 199);

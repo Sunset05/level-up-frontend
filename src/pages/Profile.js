@@ -8,10 +8,14 @@ export default function Profile({user}) {
         return user.listings?.map(listing => {
             return (
                 <div className='listing-card'>
-                    <h3>{listing.item}</h3>
-                    <img src={listing.image_url} alt={`${listing.item} `}/>
-                    <p>Asking-Price:  ${listing.price}</p>
-                    <p>{listing.description}</p>
+                    <div className='listing-content-left'>
+                        <h3 className="listing-title">{listing.item}</h3>
+                        <img src={listing.image_url} alt='image'/>
+                    </div>
+                    <div className='listing-content-right'>
+                        <p className="asking-price">Asking-Price: <span>${listing.price}</span></p>
+                        <p>{listing.description}</p>
+                    </div>
                 </div>
             )
         })
