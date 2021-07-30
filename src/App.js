@@ -41,7 +41,7 @@ class App extends Component{
     // })
     // .then(response => response.json())
     // .then(result => result.error 
-      //  this.setState({alerts: [...this.state.alerts, result.error ]}) 
+    //  this.setState({alerts: [...this.state.alerts, result.error ]}) 
     //   : this.setState({listings: result.listings})
     // )
     // .then(listings => this.setState({listings: listings}))
@@ -61,12 +61,6 @@ class App extends Component{
     })
   }
 
-
-  // createListing = (newListing) => {
-  //   this.setState({
-  //     listings: [...this.state.listings, newListing]
-  //   })
-  // }
 
   loginUser = (user) => {
     return fetch(loginUrl, {
@@ -148,7 +142,7 @@ class App extends Component{
               }}
             />
             <Route path='/profile/new'>
-                <Form />
+                <Form user={this.state.user.username} />
             </Route>
             <Route path='/profile/messages'>
                 <Messages />

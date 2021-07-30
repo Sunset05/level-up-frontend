@@ -164,6 +164,8 @@ body{
   font-size: 0.875rem;
   height: 250px;
   width: 200px;
+  min-height: 250px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   /* align-content: center;

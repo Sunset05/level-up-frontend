@@ -9,6 +9,8 @@ export default function Form(props) {
     const [imageAsFile, setImageAsFile] = useState('')
     const [imageUrl, setImageUrl] = useState("")
     const [alert, setAlert] = useState("")
+    
+    const author = props.user
     const history = useHistory()
 
     const handleImageAsFile = (event) => {
@@ -35,24 +37,26 @@ export default function Form(props) {
                     //gets the functions from storage references the image storage in firebase
                     //get the download url then sets the image from friebase as the value
                     storage.ref('images').child(imageAsFile.name).getDownloadURL()
-                        .then(fireBaseUrl => {setImageUrl(fireBaseUrl)})
-                        .then(fetch("http://localhost:9000/listings", {
-                            method: "POST",
-                            headers: {
-                                'Authorization': `Bearer ${localStorage.token}`,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                listing:{
-                                    item,
-                                    price,
-                                    description,
-                                    image_url: imageUrl
-                                }
+                        .then(fireBaseUrl => {
+                            setImageUrl(fireBaseUrl)
+                            fetch("http://localhost:9000/listings", {
+                                method: "POST",
+                                headers: {
+                                    'Authorization': `Bearer ${localStorage.token}`,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    listing:{
+                                        item,
+                                        price,
+                                        description,
+                                        image_url: fireBaseUrl,
+                                        author
+                                    }
+                                })
                             })
-                        }))
+                        })
                         .then(() => {
-
                             setAlert("post uploaded! Submit another?")
                         })
                 }
@@ -77,8 +81,6 @@ export default function Form(props) {
                 return setPrice(target.value)
             case 'description':
                 return setDescription(target.value)
-            // case 'image':
-            //     return set_image_url(target.value)
             default:
                 return ""    
         }
