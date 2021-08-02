@@ -135,13 +135,13 @@ body{
 }
 
 
-/* styling for cards */
+/* styling for Trade page */
 .trade-listings-container{
   height: 100%;
   width: 100%;
   display:flex;
+  flex-wrap: wrap;
   padding: 10px;
-  background-color: red;
 }
 
 .listing-card{
@@ -317,3 +317,4 @@ button:hover {
   background: green;
   transition: 500ms;
 }
+

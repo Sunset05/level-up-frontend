@@ -4,11 +4,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from "react-router-dom"
 // import Form from './components/Form';
 import { Component } from 'react';
-// import TradeListings from './pages/TradeListings'
+import TradeListings from './pages/TradeListings'
 import SignUpForm from './components/SignUpForm';
 import Profile from './pages/Profile'
 import PrivateRoute from './components/PrivateRoute';
@@ -22,7 +22,7 @@ const initialState = {
   alerts: [],
 }
 
-// const listingsUrl = "http://localhost:9000/listings"
+const listingsUrl = "http://localhost:9000/listings"
 const loginUrl = "http://localhost:9000/login"
 const usersUrl = "http://localhost:9000/users"
 const profileUrl = "http://localhost:9000/profile"
@@ -33,15 +33,15 @@ class App extends Component{
   
   componentDidMount(){
     this.authorizeUser()
-    // fetch(listingsUrl, {
-    //   method: 'GET',
-    //   headers:{
-    //     'Authorization': `Bearer ${localStorage.token}`
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(result => result.error 
-    //  this.setState({alerts: [...this.state.alerts, result.error ]}) 
+    fetch(listingsUrl, {
+      method: 'GET',
+      headers:{
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+    })
+    .then(response => response.json())
+    .then(listings => this.setState({listings})) 
+    // this.setState({alerts: [...this.state.alerts, result.error ]}) 
     //   : this.setState({listings: result.listings})
     // )
     // .then(listings => this.setState({listings: listings}))
@@ -108,7 +108,8 @@ class App extends Component{
 
   removeUserFromState = () => {
     this.setState({
-      user: {}
+      user: {},
+      listings: []
     })
   }
   
@@ -116,41 +117,44 @@ class App extends Component{
     return (
       <div className="app-container">
         <Router>
-        <Header user={this.state.user}/> 
-        <div className="main-page-display">
-          <Switch>
-            <PrivateRoute 
-              exact 
-              path="/profile"
-              component={Profile}
-              submitAction={this.createListing}
-              user={this.state.user}
+          <Header user={this.state.user}/> 
+          <div className="main-page-display">
+            <Switch>
+              <PrivateRoute 
+                exact 
+                path="/profile"
+                component={Profile}
+                submitAction={this.createListing}
+                user={this.state.user}
+                />
+                {/* <Form submitAction={this.createListing}/>
+                <TradeListings listings={this.state.listings}/> */}
+              <Route 
+                exact 
+                path='/signup'
+                render={(routerProps) => {
+                  return <SignUpForm {...routerProps} 
+                            signUp={this.signUp}
+                            loginUser={this.loginUser}
+                            alerts={this.state.alerts}
+                            user={this.state.user}
+                            removeUserFromState={this.removeUserFromState}
+                          />
+                }}
               />
-              {/* <Form submitAction={this.createListing}/>
-              <TradeListings listings={this.state.listings}/> */}
-            <Route 
-              exact 
-              path='/signup'
-              render={(routerProps) => {
-                return <SignUpForm {...routerProps} 
-                          signUp={this.signUp}
-                          loginUser={this.loginUser}
-                          alerts={this.state.alerts}
-                          user={this.state.user}
-                          removeUserFromState={this.removeUserFromState}
-                        />
-              }}
-            />
-            <Route path='/profile/new'>
-                <Form user={this.state.user.username} />
-            </Route>
-            <Route path='/profile/messages'>
-                <Messages />
-            </Route>
-            <Redirect to='/profile' />
-          </Switch>
-          <Footer />
-        </div>
+              <Route path='/profile/new'>
+                  <Form user={this.state.user.username} />
+              </Route>
+              <Route path='/profile/messages'>
+                  <Messages />
+              </Route>
+              <Route path='/trade/'>
+                <TradeListings listings={this.state.listings} userId={this.state.user.id}/>
+              </Route>
+              <Redirect to='/profile' />
+            </Switch>
+            <Footer />
+          </div>
         </Router>
       </div>
     );

@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom'
 
 export default function SignUpForm(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [login, setLogin] = useState(false)
+
+    const history = useHistory();
 
     useEffect(() => {
         const {removeUserFromState} = props
@@ -21,7 +24,9 @@ export default function SignUpForm(props) {
         login   
             ? props.loginUser(user)
                 .then(() => props.history.push('/'))
+                .then(()=>history.go(0))
             : props.signUp(user)
+
     }
 
     const handleChange = ({ target }) => {

@@ -1,21 +1,31 @@
 import React from 'react'
 
-export default function TradeListings({listings}) {
+export default function TradeListings({listings, userId}) {
 
-    // const renderTradeListings = () => listings.map(listing => {
-    //     return (
-    //         <div className="listing-card">
-    //             <h2>{listing.item}</h2>
-    //             <h3>{listing.price}</h3>
-    //             <p>{listing.description}</p>
-    //         </div>
-    //     )
-    // })
+    const otherUserListings = listings.filter(listing => listing.id !== userId)
+    const renderTradeListings = () => {
+        return otherUserListings.map(listing => {
+            return (
+                <div key={listing.id} className='listing-card'>
+                    <div className='listing-content-left'>
+                        <h5>Posted By: {listing.author}</h5>
+                        <h3 className="listing-title">{listing.item}</h3>
+                        <img src={listing.image_url} alt='image'/>
+                    </div>
+                    <div className='listing-content-right'>
+                        <p className="asking-price">Asking-Price: <span>${listing.price}</span></p>
+                        <p>{listing.description}</p>
+                    </div>
+                </div>
+            )
+        })
+    }
+
 
     return (
         <div className="trade-listings-container">
-            {/* {renderTradeListings()} */}
-            hi
+            {renderTradeListings()}
+
         </div>
     )
 }

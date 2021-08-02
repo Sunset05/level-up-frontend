@@ -25,17 +25,12 @@ export default function Form(props) {
             console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
         } else {
             const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile)
-
             uploadTask.on('state_changed',
                 (snapShot) => {
-                    //takes snap shot of the process as it is happening
                     console.log(snapShot)
                 }, (error) => {
-                    //catches the errors
                     console.log(error)
                 }, () => {
-                    //gets the functions from storage references the image storage in firebase
-                    //get the download url then sets the image from friebase as the value
                     storage.ref('images').child(imageAsFile.name).getDownloadURL()
                         .then(fireBaseUrl => {
                             setImageUrl(fireBaseUrl)
@@ -105,7 +100,7 @@ export default function Form(props) {
                 </label>
                 {imageUrl === ''
                     ? null
-                    : <img src={imageUrl} style={{width: 50, height: 50}} />}
+                    : <img src={imageUrl} style={{width: 50, height: 50}} alt="firebase url"/>}
                 <label>
                     Price:
                     <input type="text" name="price" value={price === 0 ? "" : price} onChange={handleChange} />

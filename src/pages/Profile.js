@@ -7,7 +7,7 @@ export default function Profile({user}) {
 
         return user.listings?.map(listing => {
             return (
-                <div className='listing-card'>
+                <div key={listing.id} className='listing-card'>
                     <div className='listing-content-left'>
                         <h3 className="listing-title">{listing.item}</h3>
                         <img src={listing.image_url} alt='image'/>
