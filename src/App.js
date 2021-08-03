@@ -146,7 +146,7 @@ class App extends Component{
                   <Form user={this.state.user.username} />
               </Route>
               <Route path='/profile/messages'>
-                  <Messages />
+                  <Messages user={this.state.user} />
               </Route>
               <Route exact path='/trade/'>
                 <TradeListings listings={this.state.listings} userId={this.state.user.id}/>

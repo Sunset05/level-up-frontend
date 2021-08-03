@@ -12,8 +12,8 @@ export default function TradeListings({listings, userId}) {
                         <h5>Posted By: {listing.author}</h5>
                         <h3 className="listing-title">{listing.item}</h3>
                         <img src={listing.image_url} alt='image'/>
-                        <Link to="/trade/">
-                            <li>Trade</li>
+                        <Link to="profile/messages">
+                            <li>Message {listing.author}</li>
                         </Link>
                     </div>
                     <div className='listing-content-right'>
@@ -29,8 +29,6 @@ export default function TradeListings({listings, userId}) {
     return (
         <div className="trade-listings-container">
             {renderTradeListings()}
-
-            
         </div>
     )
 }

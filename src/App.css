@@ -5,6 +5,7 @@
   --font-white: white;
   --gray2: gray;
   --yellow: rgb(255, 210, 87);
+  --red: rgb(245, 115, 115);
 }
 
 html{
@@ -335,3 +336,17 @@ button:hover {
   transition: 500ms;
 }
 
+/* chat message page styling */
+.message-page-container{
+  display:flex;
+}
+
+.message-sender-container{
+  border: solid var(--yellow);
+  color:white
+}
+
+.direct-message-container{
+  border: solid var(--red);
+  color:white;
+}
