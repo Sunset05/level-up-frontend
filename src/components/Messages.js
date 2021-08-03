@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import DirectMessages from './DirectMessages'
 
 
 export default function Messages(props) {
+
 
 
     return (
@@ -13,7 +14,11 @@ export default function Messages(props) {
             </div>
 
             <div className='direct-message-container'>
-                <DirectMessages sentMessages={props.user.sent_messages} receivedMessages={props.user.received_messages}/>
+                <DirectMessages 
+                    sentMessages={props.user.sent_messages} 
+                    receivedMessages={props.user.received_messages}
+                    addNewMessage={props.addNewMessage}
+                />
             </div>
             
             

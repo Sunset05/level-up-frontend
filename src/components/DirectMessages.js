@@ -1,45 +1,45 @@
 import React, { useState } from 'react'
 
-export default function DirectMessages({ receivedMessages, sentMessages }) {
+export default function DirectMessages({ receivedMessages, sentMessages, addNewMessage }) {
 
     const [chatMessage, setChatMessage] = useState('')
 
-    const userChat = [...receivedMessages, ...sentMessages].flat()
-    // const sortedChat =  userChat.sort((message1,message2) => message2.created_at.date() - message1.created_at.date() )
-    // console.log(sortedChat)
+    const userChat = [...receivedMessages, ...sentMessages]
+    const sortedChat =  userChat.sort( (a, b) => {
+        const dateA = new Date(a.created_at)
+        const dateB = new Date(b.created_at)
+        return dateA - dateB
+    } )
     
-    const renderChat = userChat.map(message => {
+    
+    const renderChat = sortedChat.map(message => {
         return (
-            <p className="chat-bubble">{message.message_body}</p>
+            <p className="chat-bubble" >{message.message_body}</p>
         )
     })
 
     const handleSendMessage = (event) => {
         event.preventDefault()
+        const message = {
+            receiver: sentMessages[0].receiver,
+                    message_body: chatMessage,
+                    has_been_read: false
+        }
         fetch("http://localhost:9000/messages", {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${localStorage.token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: {
-                    receiver: sentMessages[0].receiver,
-                    message_body: chatMessage,
-                    has_been_read: false
-                }
-            })
+                    'Authorization': `Bearer ${localStorage.token}`,
+                    'Content-Type': 'application/json'
+                },
+            body: JSON.stringify({message})
         })
-        .then(response => response.json())
-        .then(console.log)
-    }
+            .then(response => response.json())
+            .then(message => addNewMessage(message))
+}
 
     const handleChange = ({target}) => {
         setChatMessage(target.value)
     }
-
-
-
 
     return (
         <>
@@ -58,14 +58,3 @@ export default function DirectMessages({ receivedMessages, sentMessages }) {
         </>
     )
 }
-
-{/* <div key={listing.id} className='listing-card'>
-                    <div className='listing-content-left'>
-                        <h3 className="listing-title">{listing.item}</h3>
-                        <img src={listing.image_url} alt='image'/>
-                    </div>
-                    <div className='listing-content-right'>
-                        <p className="asking-price">Asking-Price: <span>${listing.price}</span></p>
-                        <p>{listing.description}</p>
-                    </div>
-                </div> */}
