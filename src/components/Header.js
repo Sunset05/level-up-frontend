@@ -6,12 +6,8 @@ export default function Header(props) {
         <div className='header'>
             <div className='inner-header'>
             <div className="logo-container">
-                <h1>Level<span>Up</span></h1>
+                {/* <h1>Level<span>Up</span></h1> */}
             </div>
-            {props.user.username
-                ? <p>Welcome back {props.user.username}!</p>
-                : null
-            }
             <ul className='navigation'>
         
                 <Link to="/">

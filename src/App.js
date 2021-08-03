@@ -148,7 +148,7 @@ class App extends Component{
               <Route path='/profile/messages'>
                   <Messages />
               </Route>
-              <Route path='/trade/'>
+              <Route exact path='/trade/'>
                 <TradeListings listings={this.state.listings} userId={this.state.user.id}/>
               </Route>
               <Redirect to='/profile' />

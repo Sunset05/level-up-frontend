@@ -4,6 +4,7 @@
   --gray1: rgb(65, 65, 65);
   --font-white: white;
   --gray2: gray;
+  --yellow: rgb(255, 210, 87);
 }
 
 html{
@@ -34,6 +35,7 @@ body{
 
 /* styling for header component */
 .header{
+  /* max-width: 100vh; */
   position: fixed;
   width: 100%;
   height: 80px;
@@ -52,16 +54,16 @@ body{
 
 .logo-container{
   height: 100%;
+  width: 50%;
   display: table;
   float: left;
-}
-
-.logo-container h1{
-  color: white;
-  height: 100%;
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 32px;
+   object-fit: contain;
+  max-height: 80px;
+  background-image: url("./image0.jpeg");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
 }
 
 .logo-container h1{
@@ -79,7 +81,7 @@ body{
 
 .navigation{
   float: right;
-  height: 50%;
+  height: 100%;
 }
 
 .navigation a{
@@ -142,6 +144,7 @@ body{
   display:flex;
   flex-wrap: wrap;
   padding: 10px;
+  justify-content: center;
 }
 
 .listing-card{
@@ -154,7 +157,7 @@ body{
   /* justify-content: center; */
   border: solid gray;
   border-radius: 6px;
-  box-shadow: 3px 3px 3px rgb(247, 117, 31);
+  box-shadow: 3px 3px 3px var(--yellow);
   padding: 10px;
   margin: 10px;
 }
@@ -162,8 +165,8 @@ body{
 .listing-content-left{
   /* color: var(--font-white); */
   font-size: 0.875rem;
-  height: 250px;
-  width: 200px;
+  max-width: 250px;
+  max-width: 200px;
   min-height: 250px;
   min-width: 200px;
   display: flex;
@@ -177,6 +180,9 @@ body{
   /* box-shadow: 3px 3px 3px rgb(247, 117, 31); */
   /* padding: 10px;
   margin: 10px; */
+}
+.listing-content-left img{
+  max-height: 159px;
 }
 
 .listing-content-right{
@@ -268,6 +274,17 @@ input[type="submit"]:hover{
   height: 200px;
   border-radius: 5px;
   justify-content: center;
+  width: 10rem;
+  align-content: flex-start ;
+  align-items: center;
+}
+
+.profile-info-container h1{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.profile-info-container a{
+  justify-content: space-between;
 }
 
 .profile-selection-Link{
@@ -297,7 +314,7 @@ input[type="submit"]:hover{
   height: 100%;
   object-fit: contain;
   max-height: 80px;
-  background-image: url("./image1.png");
+  background-image: url("./image0.png");
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-color: black;
