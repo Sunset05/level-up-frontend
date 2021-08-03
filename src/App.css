@@ -338,7 +338,9 @@ button:hover {
 
 /* chat message page styling */
 .message-page-container{
+  padding-top: 50px;
   display:flex;
+  justify-content: center;
 }
 
 .message-sender-container{
