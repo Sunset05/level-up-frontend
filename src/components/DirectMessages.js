@@ -37,7 +37,11 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
             body: JSON.stringify({message})
         })
             .then(response => response.json())
-            .then(message => addNewMessage(message))
+            .then(message => {
+                console.log(message)
+                message.receiver_info = []
+                addNewMessage(message)
+            })
 }
 
     const handleChange = ({target}) => {
@@ -52,12 +56,10 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
 
             <div className="chat-entry-container" onSubmit={handleSendMessage}>
                 <form className="chat-input-form" >
-                <label>
-                    <input type='text' value={ chatMessage } onChange={handleChange} />
+                <label className="chat-input-label">
+                    <input className="message-input" type='text' value={ chatMessage } onChange={handleChange} />
                 </label>
-                    <div>
-                        <button type='submit' className="chat-send-button">Send</button>
-                    </div>
+                <button type='submit' className="chat-send-button">Send</button>
                 </form>
             </div>
         </>
