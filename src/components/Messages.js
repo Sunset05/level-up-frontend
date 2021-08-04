@@ -10,7 +10,7 @@ export default function Messages(props) {
         <div className='message-page-container'>
             
             <div className='message-sender-container'>
-                <h1>stacey</h1>
+                <h1>chatting with stacey</h1>
             </div>
 
             <div className='direct-message-container'>

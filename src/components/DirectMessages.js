@@ -13,8 +13,11 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
     
     
     const renderChat = sortedChat.map(message => {
+        console.log(message)
         return (
-            <p className="chat-bubble" >{message.message_body}</p>
+            message.receiver_info 
+            ? <p className="sender-chat-bubble" >{message.message_body}</p>
+            : <p className="receiver-chat-bubble">{message.message_body}</p>
         )
     })
 
@@ -48,11 +51,13 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
             </div>
 
             <div className="chat-entry-container" onSubmit={handleSendMessage}>
-                <form className="form" >
+                <form className="chat-input-form" >
                 <label>
                     <input type='text' value={ chatMessage } onChange={handleChange} />
                 </label>
-                    <button type='submit'>Send</button>
+                    <div>
+                        <button type='submit' className="chat-send-button">Send</button>
+                    </div>
                 </form>
             </div>
         </>
