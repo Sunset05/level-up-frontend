@@ -12,7 +12,12 @@ export default function TradeListings({listings, userId}) {
                         <h5>Posted By: {listing.author}</h5>
                         <h3 className="listing-title">{listing.item}</h3>
                         <img src={listing.image_url} alt='image'/>
-                        <Link to="/profile/messages">
+                        <Link 
+                            to={{
+                                pathname: `/profile/messages/${listing.author}`,
+                                state: {authorId: listing.userId}
+                            }}
+                        >
                             <li className="trade-listing-message-link">Message {listing.author}</li>
                         </Link>
                     </div>

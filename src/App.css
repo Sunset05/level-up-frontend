@@ -365,6 +365,7 @@ button:hover {
   flex-direction: column;
   overflow-y: auto;
   background-color: var(--gray1);
+
 }
 .receiver-chat-bubble{
   padding: 3px;
@@ -393,6 +394,7 @@ button:hover {
 }
 
 .chat-input-form{
+  margin: 5px;
   width: 80%;
   display: flex;
   justify-content:flex-end;

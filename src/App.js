@@ -145,20 +145,41 @@ class App extends Component{
                 path='/signup'
                 render={(routerProps) => {
                   return <SignUpForm {...routerProps} 
-                            signUp={this.signUp}
-                            loginUser={this.loginUser}
-                            alerts={this.state.alerts}
-                            user={this.state.user}
-                            removeUserFromState={this.removeUserFromState}
-                          />
+                    signUp={this.signUp}
+                    loginUser={this.loginUser}
+                    alerts={this.state.alerts}
+                    user={this.state.user}
+                    removeUserFromState={this.removeUserFromState}
+                  />
                 }}
               />
               <Route path='/profile/new'>
                   <Form user={this.state.user.username} />
               </Route>
-              <Route path='/profile/messages'>
-                  <Messages user={this.state.user} addNewMessage={this.addNewMessageToState} />
-              </Route>
+
+              <Route 
+                exact 
+                path='/profile/messages'
+                render={(routerProps) => {
+                  return <Messages 
+                    user={this.state.user} 
+                    addNewMessage={this.addNewMessageToState} 
+                    {...routerProps}
+                  />
+                }}
+              />
+              <Route 
+                path='/profile/messages/:author'
+                render={(routerProps) => {
+                  return <Messages 
+                    user={this.state.user} 
+                    addNewMessage={this.addNewMessageToState} 
+                    {...routerProps}
+                  />
+                }}
+              />
+
+
               <Route exact path='/trade/'>
                 <TradeListings 
                   listings={this.state.listings} 

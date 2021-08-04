@@ -1,15 +1,21 @@
 import React, { useState } from 'react'
 
-export default function DirectMessages({ receivedMessages, sentMessages, addNewMessage }) {
+export default function DirectMessages({ receivedMessages, sentMessages, addNewMessage, chattingWithId }) {
 
     const [chatMessage, setChatMessage] = useState('')
 
-    const userChat = [...receivedMessages, ...sentMessages]
+    const chattingWithReceivedMessages = receivedMessages.filter(message => message.sender === chattingWithId)
+    const chattingWithSentMessages = sentMessages.filter(message => message.receiver === chattingWithId)
+
+
+    const userChat = [...chattingWithReceivedMessages, ...chattingWithSentMessages];
     const sortedChat =  userChat.sort( (a, b) => {
         const dateA = new Date(a.created_at)
         const dateB = new Date(b.created_at)
         return dateA - dateB
-    } )
+    })
+
+
     
     
     const renderChat = sortedChat.map(message => {
@@ -24,7 +30,7 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
     const handleSendMessage = (event) => {
         event.preventDefault()
         const message = {
-            receiver: sentMessages[0].receiver,
+            receiver: chattingWithId,
                     message_body: chatMessage,
                     has_been_read: false
         }
