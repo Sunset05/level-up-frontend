@@ -131,15 +131,15 @@ class App extends Component{
           <Header user={this.state.user}/> 
           <div className="main-page-display">
             <Switch>
+
               <PrivateRoute 
                 exact 
                 path="/profile"
                 component={Profile}
                 submitAction={this.createListing}
                 user={this.state.user}
-                />
-                {/* <Form submitAction={this.createListing}/>
-                <TradeListings listings={this.state.listings}/> */}
+              />
+
               <Route 
                 exact 
                 path='/signup'
@@ -153,6 +153,7 @@ class App extends Component{
                   />
                 }}
               />
+
               <Route path='/profile/new'>
                   <Form user={this.state.user.username} />
               </Route>
@@ -168,6 +169,7 @@ class App extends Component{
                   />
                 }}
               />
+
               <Route 
                 path='/profile/messages/:author'
                 render={(routerProps) => {
@@ -179,13 +181,12 @@ class App extends Component{
                 }}
               />
 
-
               <Route exact path='/trade/'>
-                <TradeListings 
-                  listings={this.state.listings} 
-                  userId={this.state.user.id}
-                  
-                />
+              <TradeListings 
+                listings={this.state.listings} 
+                userId={this.state.user.id}
+              />
+
               </Route>
               <Redirect to='/profile' />
             </Switch>
