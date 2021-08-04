@@ -328,7 +328,6 @@ button:hover {
 .message-page-container{
   padding-top: 50px;
   display:flex;
-  flex-direction: ;
   justify-content: center;
 }
 
