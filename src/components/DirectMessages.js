@@ -38,7 +38,6 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
         })
             .then(response => response.json())
             .then(message => {
-                console.log(message)
                 message.receiver_info = []
                 addNewMessage(message)
             })

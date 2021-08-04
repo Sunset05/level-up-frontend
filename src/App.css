@@ -146,6 +146,7 @@ body{
 }
 
 .listing-card{
+  background-color: var(--gray1);
   color: var(--font-white);
   height: 250px;
   width: 400px;
@@ -203,6 +204,12 @@ body{
   width: 2em;
   background-color: var(--gray2);
   margin: 0.5 auto 0.5em;
+}
+
+.trade-listing-message-link{
+  border: solid var(--gray2);
+  background-color: var(--gray1);
+  color: var(--red);
 }
 /* styling for buttons */
 input[type="submit"]{
@@ -333,7 +340,13 @@ button:hover {
 
 .message-sender-container{
   border: solid var(--yellow);
+  background-color: var(--gray1);
   color:white
+
+}
+.message-sender-container h1{
+  padding: 10px;
+
 }
 
 .direct-message-container{
@@ -351,7 +364,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  background-color: var(--gray0);
+  background-color: var(--gray1);
 }
 .receiver-chat-bubble{
   padding: 3px;
@@ -372,6 +385,7 @@ button:hover {
 }
 
 .chat-entry-container {
+  background-color: var(--black);
   display: flex;
   flex-direction: row;
   justify-content:center ;
