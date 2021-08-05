@@ -47,6 +47,7 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
                 message.receiver_info = []
                 addNewMessage(message)
             })
+            setChatMessage("")
 }
 
     const handleChange = ({target}) => {
