@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef } from "react"
 
 export default function FileUploader({onFileSelectError, onFileSelectSuccess}) {
     const fileInput = useRef(null);
@@ -13,8 +13,10 @@ export default function FileUploader({onFileSelectError, onFileSelectSuccess}) {
     return (
         <div className="file-uploader">
             <input type="file" onChange={handleFileInput} />
-            <button onClick={(event) => {fileInput.current && fileInput.current.click()}} className="btn-primary"></button>
+            <button 
+                onClick={(event) => {fileInput.current && fileInput.current.click()}} className="btn-primary"
+            >
+            </button>
         </div>
     )
 }
-git 

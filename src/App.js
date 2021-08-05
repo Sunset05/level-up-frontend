@@ -1,20 +1,20 @@
-import './App.css';
-import Header from './components/Header';
+import { Component } from "react";
+import "./App.css";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom"
-// import Form from './components/Form';
-import { Component } from 'react';
-import TradeListings from './pages/TradeListings'
-import SignUpForm from './components/SignUpForm';
-import Profile from './pages/Profile'
-import PrivateRoute from './components/PrivateRoute';
-import Footer from './components/Footer';
-import Form from './components/Form';
-import Messages from './components/Messages';
+
+import Header from "./components/Header";
+import TradeListings from "./pages/TradeListings"
+import SignUpForm from "./components/SignUpForm";
+import Profile from "./pages/Profile"
+import PrivateRoute from "./components/PrivateRoute";
+import Footer from "./components/Footer";
+import Form from "./components/Form";
+import Messages from "./components/Messages";
 
 const initialState = {
   listings: [],
@@ -35,30 +35,26 @@ class App extends Component{
   componentDidMount(){
     this.authorizeUser()
     fetch(listingsUrl, {
-      method: 'GET',
+      method: "GET",
       headers:{
-        'Authorization': `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${ localStorage.token }`
       }
     })
     .then(response => response.json())
-    .then(listings => this.setState({listings})) 
-    // this.setState({alerts: [...this.state.alerts, result.error ]}) 
-    //   : this.setState({listings: result.listings})
-    // )
-    // .then(listings => this.setState({listings: listings}))
+    .then(listings => this.setState({ listings })) 
   }
 
   authorizeUser = () => {
     fetch(profileUrl, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Authorization': `Bearer ${localStorage.token}`
+        "Authorization": `Bearer ${ localStorage.token }`
       }
     })
     .then(response => response.json())
     .then(loggedInUser => {
       const { user } = loggedInUser
-      return user ? this.setState({user}) : null
+      return user ? this.setState({ user }) : null
     })
   }
 
@@ -67,16 +63,16 @@ class App extends Component{
     return fetch(loginUrl, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({user})
+      body: JSON.stringify({ user })
     })
     .then(response => response.json())
     .then(response => {
       if(response.error){
         this.setState({alerts: [response.error]})
       } else {
-        localStorage.setItem('token', response.token)
+        localStorage.setItem("token", response.token)
           this.setState({
             user: response.user,
             alerts: ["Successful Login!"],
@@ -88,9 +84,9 @@ class App extends Component{
 
   signUp = (user) => {
     return fetch(usersUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({ user })
     })
@@ -117,7 +113,7 @@ class App extends Component{
   addNewMessageToState = (newMessage) => {
     const updateUserState = this.state.user
     updateUserState.sent_messages = [...updateUserState.sent_messages, newMessage]
-    this.setState({updateUserState})
+    this.setState({ updateUserState })
   }
   
   addNewDirectMessage = (userToMessage) => {
@@ -128,67 +124,67 @@ class App extends Component{
     return (
       <div className="app-container">
         <Router>
-          <Header user={this.state.user}/> 
+          <Header user={ this.state.user }/> 
           <div className="main-page-display">
             <Switch>
 
               <PrivateRoute 
                 exact 
                 path="/profile"
-                component={Profile}
-                submitAction={this.createListing}
-                user={this.state.user}
+                component={ Profile }
+                submitAction={ this.createListing }
+                user={ this.state.user }
               />
 
               <Route 
                 exact 
-                path='/signup'
-                render={(routerProps) => {
-                  return <SignUpForm {...routerProps} 
-                    signUp={this.signUp}
-                    loginUser={this.loginUser}
-                    alerts={this.state.alerts}
-                    user={this.state.user}
-                    removeUserFromState={this.removeUserFromState}
+                path="/signup"
+                render={ (routerProps) => {
+                  return <SignUpForm { ...routerProps } 
+                    signUp={ this.signUp }
+                    loginUser={ this.loginUser }
+                    alerts={ this.state.alerts }
+                    user={ this.state.user }
+                    removeUserFromState={ this.removeUserFromState }
                   />
                 }}
               />
 
-              <Route path='/profile/new'>
-                  <Form user={this.state.user.username} />
+              <Route path="/profile/new">
+                <Form user={ this.state.user.username } />
               </Route>
 
               <Route 
                 exact 
-                path='/profile/messages'
+                path="/profile/messages"
                 render={(routerProps) => {
                   return <Messages 
-                    user={this.state.user} 
-                    addNewMessage={this.addNewMessageToState} 
-                    {...routerProps}
+                    user={ this.state.user } 
+                    addNewMessage={ this.addNewMessageToState } 
+                    { ...routerProps }
                   />
                 }}
               />
 
               <Route 
-                path='/profile/messages/:author'
-                render={(routerProps) => {
+                path="/profile/messages/:author"
+                render={ (routerProps) => {
                   return <Messages 
-                    user={this.state.user} 
-                    addNewMessage={this.addNewMessageToState} 
-                    {...routerProps}
+                    user={ this.state.user } 
+                    addNewMessage={ this.addNewMessageToState } 
+                    { ...routerProps }
                   />
                 }}
               />
 
-              <Route exact path='/trade/'>
+              <Route exact path="/trade/">
               <TradeListings 
-                listings={this.state.listings} 
-                userId={this.state.user.id}
+                listings={ this.state.listings } 
+                userId={ this.state.user.id }
               />
 
               </Route>
-              <Redirect to='/profile' />
+              <Redirect to="/profile" />
             </Switch>
             <Footer />
           </div>

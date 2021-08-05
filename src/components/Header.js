@@ -1,29 +1,25 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react"
+import { Link } from "react-router-dom"
 
-export default function Header(props) {
+export default function Header() {
     return (
-        <div className='header'>
-            <div className='inner-header'>
-            <div className="logo-container">
-                {/* <h1>Level<span>Up</span></h1> */}
-            </div>
-            <ul className='navigation'>
-        
-                <Link to="/">
-                <li>Profile</li>
-                </Link>
+        <div className="header">
+            <div className="inner-header">
+                <div className="logo-container"></div>
 
-                <Link to="/trade/">
-                <li>Trade</li>
-                </Link>
+                <ul className="navigation">            
+                    <Link to="/">
+                        <li className="navbar-link">Profile</li>
+                    </Link>
 
-                <Link to="/signup">
-                <li>Logout</li>
-                </Link>
+                    <Link to="/trade/">
+                        <li className="navbar-link">Trade</li>
+                    </Link>
 
-
-            </ul>
+                    <Link to="/signup">
+                        <li className="navbar-link">Logout</li>
+                    </Link>
+                </ul>
             </div>
         </div>
     )

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
 export default function DirectMessages({ receivedMessages, sentMessages, addNewMessage, chattingWithId }) {
 
-    const [chatMessage, setChatMessage] = useState('')
+    const [chatMessage, setChatMessage] = useState("")
 
     const chattingWithReceivedMessages = receivedMessages.filter(message => message.sender === chattingWithId)
     const chattingWithSentMessages = sentMessages.filter(message => message.receiver === chattingWithId)
@@ -15,15 +15,15 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
         return dateA - dateB
     })
 
-
-    
-    
     const renderChat = sortedChat.map(message => {
-        console.log(message)
         return (
             message.receiver_info 
-            ? <p className="sender-chat-bubble" >{message.message_body}</p>
-            : <p className="receiver-chat-bubble">{message.message_body}</p>
+            ?   <div className="sender-chat-container">{ message.receiver_info.username }
+                    <p className="sender-chat-bubble" >{ message.message_body }</p>
+                </div>
+            :   <div className="receiver-chat-container">{ message.sender_info.username }
+                    <p className="receiver-chat-bubble">{ message.message_body }</p>
+                </div>
         )
     })
 
@@ -31,15 +31,15 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
         event.preventDefault()
         const message = {
             receiver: chattingWithId,
-                    message_body: chatMessage,
-                    has_been_read: false
+            message_body: chatMessage,
+            has_been_read: false
         }
         fetch("http://localhost:9000/messages", {
-            method: 'POST',
+            method: "POST",
             headers: {
-                    'Authorization': `Bearer ${localStorage.token}`,
-                    'Content-Type': 'application/json'
-                },
+                "Authorization": `Bearer ${localStorage.token}`,
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({message})
         })
             .then(response => response.json())
@@ -57,15 +57,20 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
     return (
         <>
             <div className="chat-container">
-                {renderChat}
+                { renderChat }
             </div>
 
-            <div className="chat-entry-container" onSubmit={handleSendMessage}>
+            <div className="chat-entry-container" onSubmit={ handleSendMessage }>
                 <form className="chat-input-form" >
                 <label className="chat-input-label">
-                    <input className="message-input" type='text' value={ chatMessage } onChange={handleChange} />
+                    <input 
+                        className="message-input" 
+                        type="text" 
+                        value={ chatMessage } 
+                        onChange={ handleChange } 
+                    />
                 </label>
-                <button type='submit' className="chat-send-button">Send</button>
+                <button type="submit" className="chat-send-button">Send</button>
                 </form>
             </div>
         </>
