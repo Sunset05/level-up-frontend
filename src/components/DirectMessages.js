@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-export default function DirectMessages({ receivedMessages, sentMessages, addNewMessage, chattingWithId }) {
+export default function DirectMessages({ user, receivedMessages, sentMessages, addNewMessage, chattingWithId }) {
 
     const [chatMessage, setChatMessage] = useState("")
 
@@ -18,10 +18,12 @@ export default function DirectMessages({ receivedMessages, sentMessages, addNewM
     const renderChat = sortedChat.map(message => {
         return (
             message.receiver_info 
-            ?   <div className="sender-chat-container">{ message.receiver_info.username }
+            ?   <div key={message.id} className="sender-chat-container">
+                    <p className="sender-author-p" >{ user.username }</p>
                     <p className="sender-chat-bubble" >{ message.message_body }</p>
                 </div>
-            :   <div className="receiver-chat-container">{ message.sender_info.username }
+            :   <div key={message.id} className="receiver-chat-container">
+                    <p className="receiver-author-p" >{ message.sender_info[0].username }</p>
                     <p className="receiver-chat-bubble">{ message.message_body }</p>
                 </div>
         )

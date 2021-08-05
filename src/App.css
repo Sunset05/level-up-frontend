@@ -399,21 +399,39 @@ button:hover {
 .receiver-chat-container{
   padding: 3px;
   margin: 7px;
+  border-radius: 8px;
+  width: 240px;
+  align-self: flex-start;
+}
+
+.receiver-chat-container .receiver-author-p{
+  padding-left: 20px;
+}
+.receiver-chat-bubble{
+  padding: 3px;
+  margin: 7px;
   border: solid var(--red);
   border-radius: 8px;
   width: 240px;
   align-self: flex-start;
 }
-.receiver-chat-bubble{
-  /* padding: 3px;
-  margin: 7px;
-  border: solid var(--red);
-  border-radius: 8px;
-  width: 240px;
-  align-self: flex-start; */
-}
 
 .sender-chat-container{
+  padding: 20px;
+  margin: 2px;
+  border-radius: 8px;
+  width: 240px;
+  justify-content: right;
+  align-self: flex-end;
+}
+
+.sender-chat-container .sender-author-p{
+  padding-right: 10px;
+  text-align: right;
+
+}
+
+.sender-chat-bubble{
   padding: 3px;
   margin: 2px;
   border: solid gray;
@@ -421,16 +439,6 @@ button:hover {
   width: 240px;
   justify-content: right;
   align-self: flex-end;
-}
-
-.sender-chat-bubble{
-  /* padding: 3px;
-  margin: 2px;
-  border: solid gray;
-  border-radius: 8px;
-  width: 240px;
-  justify-content: right;
-  align-self: flex-end; */
 }
 
 .chat-entry-container {
