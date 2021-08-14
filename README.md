@@ -33,7 +33,7 @@ You will also see any lint errors in the console.
 - react-router-dom: ^5.2.0
 
 # Demo
-[LevelUp Demo](#https://youtu.be/zo203HeqSaw) of the frontend.
+youtube [LevelUp Demo](#https://youtu.be/zo203HeqSaw) of the frontend.
 
 # Setup
 This project relies on the backend running locally. check out [this repo](#https://github.com/Sunset05/level_up_backen) for configuration
@@ -52,6 +52,6 @@ This project relies on the backend running locally. check out [this repo](#https
 - Protected Routes 
 
 # Contact
-[Linkedin](#https://www.linkedin.com/in/keith-funk/)
+Contact: [Linkedin](#https://www.linkedin.com/in/keith-funk/)
 
 
